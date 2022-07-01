@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title></title>
+</head>
+<body>
+<div class="container">
+    <h2>Search for Movies</h2>
+    <form th:object="${movie}" th:action="@{/movies}" method="get">
+        <input type="text" name="search" id="search" th:value="${search}"/>
+        <input type="submit" value="Search"/>
+        <div th:if="${not #lists.isEmpty(search)}">
+            <h2>Movie List</h2>
+            <table class="table table-striped">
+                <tr>
+                    <th>Title</th>
+                    <th>Year</th>
+                    <th>imdbId</th>
+                    <th>Type</th>
+                </tr>
+                <tr th:each="movie: ${search}">
+                    <td th:text="${movie.title}">Title</td>
+                    <td th:text="${movie.year}">Year</td>
+                    <td th:text="${movie.imdbId}">imdbId</td>
+                    <td th:text="${movie.type}">Type</td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</div>
+</body>
+</html>
